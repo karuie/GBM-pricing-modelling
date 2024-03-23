@@ -1,6 +1,6 @@
-# author: yimin
-# 
-# update: as of 23rd March 2024
+// author: yimin
+ 
+// update: as of 23rd March 2024
 
 #include <iostream>
 #include <vector>
@@ -53,6 +53,35 @@ int main() {
     return 0;
 }
 
+
+
+// BS testing
+
+#include <iostream>
+#include <cmath>
+
+double blackScholesCall(double S, double K, double r, double sigma, double T) {
+    double d1 = (log(S / K) + (r + 0.5 * sigma * sigma) * T) / (sigma * sqrt(T));
+    double d2 = d1 - sigma * sqrt(T);
+    return S * norm_cdf(d1) - K * exp(-r * T) * norm_cdf(d2);
+}
+
+double norm_cdf(double x) {
+    return 0.5 * (1 + erf(x / sqrt(2)));
+}
+
+int main() {
+    double S = 100;         // Current stock price
+    double K = 100;         // Strike price
+    double r = 0.05;        // Risk-free interest rate
+    double sigma = 0.2;     // Volatility
+    double T = 1.0;         // Time to expiration (in years)
+
+    double callPrice = blackScholesCall(S, K, r, sigma, T);
+    std::cout << "European Call Option Price: " << callPrice << std::endl;
+
+    return 0;
+}
 
 
 
